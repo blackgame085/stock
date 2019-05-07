@@ -101,16 +101,28 @@ class addProduct extends React.Component {
     }
 
     onSubmit(e) {
+        e.preventDefault()
         const obj = {
             name: this.state.name,
             unit: this.state.unit,
             store: this.state.storeData,
         }
 
-        axios.post('http://localhost:4000/product/addProduct', obj)
+        if(obj.store.length !== 0) {
+            axios.post('http://localhost:4000/product/addProduct', obj)
+            .then(
+                window.location.reload()
+            )
+        }else {
+            alert('Please Add Something')
+        }
+        /*
+            axios.post('http://localhost:4000/product/addProduct', obj)
         .then(
             window.location.reload()
         )
+        */
+        
         console.log(obj)
     }
     

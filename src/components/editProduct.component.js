@@ -164,16 +164,14 @@ class editProduct extends React.Component {
         }
         
 
-        axios.post('http://localhost:4000/product/update/'+this.props.match.params.id, store)
-        .then(
-            
-        )
-        .then(
-            
-        )
-
-
-
+        if(store.store.length !== 0) {
+            axios.post('http://localhost:4000/product/update/'+this.props.match.params.id, store)
+            .then(
+                alert('Update pass')
+            )
+        }else {
+            alert('Update fail')
+        }
     }
 
     render() {
