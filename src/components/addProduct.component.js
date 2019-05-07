@@ -154,6 +154,7 @@ class addProduct extends React.Component {
                             textField="item_name"
                             dataItemKey="_id"
                             onChange={e => {this.onChangeName("item_name", e.target.value.item_name)}}
+                            defaultItem=''
                             required
                         />
                     </div>

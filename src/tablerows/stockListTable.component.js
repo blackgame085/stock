@@ -2,10 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-
-
 class StockListTable extends React.Component {
-
     constructor(props) {
         super(props)
         this.delete = this.delete.bind(this)

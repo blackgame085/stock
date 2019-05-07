@@ -12,6 +12,8 @@ import Test from './components/test.component'
 import HistoryList from './components/history.component'
 import addProduct from './components/addProduct.component'
 import addTest from './components/testfile'
+import productList from './components/productList.component'
+import editProduct from './components/editProduct.component'
 
 
 class App extends Component {
@@ -33,13 +35,7 @@ class App extends Component {
                       <Link to={'/history'} className="nav-link">History</Link>
                     </li>
                     <li className="nav-item">
-                      <Link to={'/addProduct'} className="nav-link">Add Product</Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link to={'/test'} className="nav-link">Test Page</Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link to={'/addTest'} className="nav-link">Test File</Link>
+                      <Link to={'/productList'} className="nav-link">Product List</Link>
                     </li>
                   </ul>
                 </div>
@@ -53,7 +49,9 @@ class App extends Component {
               <Route path="/stock" component={StockList} />
               <Route path="/edit/:id" component={EditStock} />
               <Route path="/history" component={HistoryList} />
+              <Route path="/productList" component={productList} />
               <Route path="/addProduct" component={addProduct} />
+              <Route path="/editProduct/:id" component={editProduct} />
               <Route path="/test" component={Test} />
               <Route path="/addTest" component={addTest} />
             </Switch>

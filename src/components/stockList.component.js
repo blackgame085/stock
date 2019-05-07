@@ -43,7 +43,7 @@ export default class StockList extends React.Component {
                         { this.tableRow() }
                     </tbody>
                 </table>
-                <Link to={"/addStock"} className="btn btn-primary">Add</Link>
+                <Link to={"/addStock"} className="btn btn-primary" style={{marginRight: '15px'}}>Add</Link>
                 <Link to={"/addUnit"} className="btn btn-primary">Create Unit</Link>
             </div>
         )
