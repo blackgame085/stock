@@ -18,7 +18,9 @@ export default class AddStock extends React.Component {
             unit: '',
             warning: '',
             unitstock: [],
-            history_log: [],
+            history_item_name: [],
+            history_item_quantity: [],
+            history_item_unit: [],
             history_log_status: [],
             date: new Date()
         }
@@ -93,7 +95,9 @@ export default class AddStock extends React.Component {
             
             () => {
                 const test = {
-                    history_log: `You have been add ${newStock.item_name} ${newStock.quantity} ${newStock.unit}`,
+                    history_item_name: newStock.item_name,
+                    history_item_quantity: newStock.quantity,
+                    history_item_unit: newStock.unit,
                     history_log_status: `Add`,
                     date: this.formatDate(this.state.date)
                 }

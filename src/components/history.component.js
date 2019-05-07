@@ -1,46 +1,76 @@
 import React from 'react'
 import axios from 'axios'
-import HistoryList from '../tablerows/historyListTable.component'
+import { MDBDataTable } from 'mdbreact';
 
 export default class StockList extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state = {history: []}
+        this.state = {
+            data: {
+                columns: [
+                    {
+                        label: 'Date',
+                        field: 'date',
+                        sort: 'desc',
+                    },
+                    {
+                        label: 'Status',
+                        field: 'status',
+                        sort: 'desc',
+
+                    },
+                    {
+                        label: 'Name',
+                        field: 'name',
+                        sort: 'desc',
+
+                    },
+                    {
+                        label: 'Quantity',
+                        field: 'quantity',
+                        sort: 'desc',
+
+                    },
+                    {
+                        label: 'Unit',
+                        field: 'unit',
+                        sort: 'desc',
+
+                    },
+                ],
+                rows: []
+            },
+        }
     }
 
     componentDidMount() {
         axios.get('http://localhost:4000/log/')
         .then(res => {
-            this.setState({ history: res.data})
+            this.setState({ data: {
+                columns: this.state.data.columns,
+                rows: res.data.map(obj => {
+                    return {date: obj.date, status: obj.history_log_status, name: obj.history_item_name, quantity: obj.history_item_quantity, unit: obj.history_item_unit}
+                })
+            }})
         })
         .catch(err => {
             console.log(err)
         })
     }
 
-    tableRow() {
-        return this.state.history.map((object, i) => {
-            return <HistoryList obj={object} key={i} />
-        })
-    }
-
     render() {
         return (
             <div>
-                <h3 align="center">Item List</h3>
-                <table className="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Action</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.tableRow()}
-                    </tbody>
-                </table>
+                <form onSubmit={this.onSubmit}>
+                    <MDBDataTable
+                        striped
+                        bordered
+                        small
+                        data={this.state.data}
+                    />
+
+                </form>
             </div>
         )
     }

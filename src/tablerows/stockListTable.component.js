@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
+
 class StockListTable extends React.Component {
     constructor(props) {
         super(props)
@@ -33,7 +34,9 @@ class StockListTable extends React.Component {
 
     delete() {
         const log = {
-            history_log: `You have been delete ${this.props.obj.item_name}`,
+            history_item_name: this.props.obj.item_name,
+            history_item_quantity: this.props.obj.quantity,
+            history_item_unit: this.props.obj.unit,
             history_log_status: `Delete`,
             date: this.formatDate(this.state.date)
         }

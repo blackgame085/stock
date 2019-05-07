@@ -28,9 +28,9 @@ export default class StockList extends React.Component {
 
     render() {
         return (
-            <div>
+            <div style={{marginBottom: '100px'}}>
                 <h3 align="center">Item List</h3>
-                <table className="table table-striped">
+                <table className="table table-striped" style={{marginBottom: '35px'}}>
                     <thead>
                         <tr>
                             <th>Name</th>

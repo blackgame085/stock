@@ -1,86 +1,83 @@
 import React from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { MDBDataTable } from 'mdbreact';
 
-
-class productList extends React.Component {
+export default class Test extends React.Component {
 
     constructor(props) {
         super(props)
-        this.Show = this.Show.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
         this.state = {
-            stock: [],
-            storeNumber: [],
-            storeId: [],
-            store: []
+            data: {
+                columns: [
+                    {
+                        label: 'Date',
+                        field: 'date',
+                        sort: 'desc',
+                    },
+                    {
+                        label: 'Status',
+                        field: 'status',
+                        sort: 'desc',
+
+                    },
+                    {
+                        label: 'Name',
+                        field: 'name',
+                        sort: 'desc',
+
+                    },
+                    {
+                        label: 'Quantity',
+                        field: 'quantity',
+                        sort: 'desc',
+
+                    },
+                    {
+                        label: 'Unit',
+                        field: 'unit',
+                        sort: 'desc',
+
+                    },
+                ],
+                rows: []
+            },
         }
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/product')
+        axios.get('http://localhost:4000/log/')
         .then(res => {
-            this.setState({
-                stock: res.data,
-                storeNumber: res.data.map(obj => {
-                    return obj.store.map(object => {
-                        return parseInt(object.store_item_quantity[0])
-                    })
+            this.setState({ data: {
+                columns: this.state.data.columns,
+                rows: res.data.map(obj => {
+                    return {date: obj.date, status: obj.history_log_status, name: obj.history_item_name, quantity: obj.history_item_quantity, unit: obj.history_item_unit}
                 })
-            })
+            }})
+        })
+        .catch(err => {
+            console.log(err)
         })
     }
 
-    Show() {
-        let store = this.state.storeNumber
-        console.log(store.map(obj => {return obj}))
-        const Test = (props) => {
-            return <td align="center" obj={props._id}><Link to={"/editProduct/"+props.obj._id} className="btn btn-primary">Edit</Link></td>
-            
-        }
-
-
-        if(store.length <= store.length+1) {
-        let i = 0
-         return this.state.stock.map(obj => {
-            return (
-                <tr key={obj._id}>
-                    <td>{obj.name}</td>
-                    <td>{Math.min.apply(null, store[i++])}</td>
-                    <td>{obj.unit}</td>
-                    <Test obj={obj}/>
-                    <td align="center"><Link to={"/editProduct"} className="btn btn-primary">Delete</Link></td>
-                </tr>
-            )   
-        })
-    }
+    onSubmit(e) {
+        e.preventDefault()
+        console.log(this.state.data)  
     }
 
     render() {
         return (
             <div>
-                <form>
-                    <div className="form-group">
-                        <table className="table">
-                            <thead className="thead-dark" style={{textAlign: 'center'}}>
-                                <tr>
-                                    <th>Product Name</th>
-                                    <th>Product Quantity</th>
-                                    <th>unit</th>
-                                    <th colSpan="2" style={{textAlign: "center"}}>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {this.Show()}
-                            </tbody>
-                        </table>
-                    </div>
-                    <input type="submit" value="test"/>
+                <form onSubmit={this.onSubmit}>
+                    <MDBDataTable
+                        striped
+                        bordered
+                        small
+                        data={this.state.data}
+                    />
+                    <input type="Submit" defaultValue="test" />
                 </form>
-                <Link to={"/addProduct"} className="btn btn-primary">Add Product</Link>
             </div>
         )
     }
-
 }
-
-export default productList

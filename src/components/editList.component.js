@@ -19,7 +19,9 @@ export default class EditStock extends React.Component {
             unit: '',
             warning: '',
             unitstock: [],
-            history_log: [],
+            history_item_name: [],
+            history_item_quantity: [],
+            history_item_unit: [],
             history_log_status: [],
             date: new Date()
         }
@@ -87,7 +89,6 @@ export default class EditStock extends React.Component {
     }
 
     onSubmit(e) {
-        e.preventDefault()
         console.log(this.formatDate(this.state.date))
         const obj = {
             item_name: this.state.item_name,
@@ -110,7 +111,9 @@ export default class EditStock extends React.Component {
                     warning: res.data.warning
                 }
                 const test = {
-                    history_log: `You have been change name: ${name.item_name} to ${obj.item_name} quantity: ${name.quantity} to ${obj.quantity} unit: ${name.unit} to ${obj.unit} warning: ${name.warning} to ${obj.warning}`,
+                    history_item_name: `${name.item_name} => ${obj.item_name}`,
+                    history_item_quantity: `${name.quantity} => ${obj.quantity}`,
+                    history_item_unit: `${name.unit} => ${obj.unit}`,
                     history_log_status: `Edit`,
                     date: this.formatDate(this.state.date)
                 }

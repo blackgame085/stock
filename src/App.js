@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css"
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
+import { MDBIcon } from "mdbreact"
 
 import '@progress/kendo-theme-default/dist/all.css'
 import Home from './components/home.component'
@@ -22,7 +26,7 @@ class App extends Component {
       <Router>
             <div className="container">
               <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <Link to={'/'} className="navbar-brand">React CRUD Example</Link>
+                <Link to={'/'} className="navbar-brand"><MDBIcon icon="coffee" size="2x" className="brown-text" style={{padding: '7px 15px'}} /></Link>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
@@ -36,6 +40,9 @@ class App extends Component {
                     </li>
                     <li className="nav-item">
                       <Link to={'/productList'} className="nav-link">Product List</Link>
+                    </li>
+                    <li>
+                      <Link to={'/test'} className="nav-link">Test</Link>
                     </li>
                   </ul>
                 </div>
